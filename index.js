@@ -151,4 +151,4 @@ client.on('interactionCreate', async interaction => {
     }
 });
 
-client.login('MTA5NjM1NzgzMjkyMTcyNzA2Nw.Gmzh63.fvvAfsBIKMt1ly1yXEYoO0GRdxW2sszifj3VzU');
+client.login('token');
