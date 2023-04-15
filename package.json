@@ -1,0 +1,14 @@
+{
+  "name": "package.json",
+  "version": "1.0.0",
+  "description": "a simple role bot for tacverse_tcg",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "brot20",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.9.0"
+  }
+}
