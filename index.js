@@ -12,6 +12,7 @@ const client = new Client({
 
 client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}`);
+
         const additem = {
         name: 'additem',
         description: 'Assign a role to a member',
@@ -30,6 +31,7 @@ client.on('ready', async () => {
             },
         ],
         };
+
         const checkitems = {
             name: 'checkitems',
             description: 'View Items of a member.',
@@ -67,36 +69,47 @@ client.on('interactionCreate', async interaction => {
     if (commandName === 'additem') {
         const role = options.getRole('item');
         const member = options.getMember('member');
+        const memberRoles = member.roles.cache.map(role => role.name);
+        console.log(memberRoles);
+        console.log(role.name);
+ 
+            if(!role && !member) {
+                return interaction.reply({
+                    content: 'Please provide both an item and a member.',
+                    ephemeral: true
+                })
+            }
+            if (!role) {
+                return interaction.reply({
+                    content: 'Please provide an item.',
+                    ephemeral: true
+                });
+            }
+            if (!member) {
+                return interaction.reply({
+                    content: 'Please provide a member.',
+                    ephemeral: true
+                });
+            }
 
-        if(!role && !member) {
-            return interaction.reply({
-                content: 'Please provide both an item and a member.',
-                ephemeral: true
-            })
-        }
-        if (!role) {
-            return interaction.reply({
-            content: 'Please provide an item.',
-            ephemeral: true
-            });
-        }
-        if (!member) {
-            return interaction.reply({
-            content: 'Please provide a member.',
-            ephemeral: true
-            });
-        }
-
-        try {
-            await member.roles.add(role);
-            await interaction.reply(`Role ${role.name} assigned to ${member.user.tag}.`);
-        } catch (error) {
-            console.error(error);
-            await interaction.reply({
-            content: 'There was an error while assigning the role.',
-            ephemeral: true
-            });
-        }
+            if(memberRoles.includes(role.name)) {
+                console.log('include');
+                await interaction.reply({
+                    content: `The member ${member.user.tag} already has the ${role.name} role.`,
+                    ephemeral: true
+                }); } else {
+                    console.log('not include');
+                    try {
+                        await member.roles.add(role);
+                        await interaction.reply(`Role ${role.name} assigned to ${member.user.tag}.`);
+                    } catch (error) {
+                        console.error(error);
+                            await interaction.reply({
+                                content: 'There was an error while assigning the role.',
+                                ephemeral: true
+                            });
+                    }
+            }
     }
 
     // ----------------------------------- CHECKITEMS ---------------------------------
@@ -151,4 +164,4 @@ client.on('interactionCreate', async interaction => {
     }
 });
 
-client.login('token');
+client.login('');
