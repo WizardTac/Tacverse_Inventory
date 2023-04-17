@@ -61,4 +61,4 @@ client.on('interactionCreate', async interaction => {
 
 }),
 
-client.login('MTA5NjM1NzgzMjkyMTcyNzA2Nw.G-LAx7.gtuAMk3H32H9IK0skWIV7rPDndiXDZEy6ZpJ2w')
+client.login('token-goes-here')
