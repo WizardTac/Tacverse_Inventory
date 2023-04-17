@@ -1,5 +1,7 @@
 const Discord = require('discord.js');
 const { Client, GatewayIntentBits, InteractionReplyOptions, MessageAttachment, AttachmentBuilder, ActivityType} = require('discord.js')
+const { SlashCommandBuilder } = require('@discordjs/builders');
+const axios = require('axios');
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -9,14 +11,17 @@ const client = new Client({
         GatewayIntentBits.GuildIntegrations,
     ]
 })
-const checkItems = require('./commands/checkitems.js');
-const addItem = require('./commands/additem.js');
+const checkItems = require('./cmd/checkitems.js');
+const addItem = require('./cmd/additem.js');
+//const createBoss = require ('./cmd/createboss.js');
 
 client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}`);
 
     const data = await client.application.commands.create(addItem);
     const data2= await client.application.commands.create(checkItems);
+    //const data3= await client.application.commands.create(createBoss);
+
     console.log(data, data2);
 
     client.user.setPresence({
@@ -47,6 +52,13 @@ client.on('interactionCreate', async interaction => {
     if (commandName === 'checkitems') {
         checkItems.execute(interaction);
     };
+
+    // ----------------------------------- CREATEBOSS ---------------------------------
+
+   // if (commandName === 'createboss') {
+   //     createBoss.execute(interaction);
+   // };
+
 }),
 
-client.login('token-goes-here')
+client.login('MTA5NjM1NzgzMjkyMTcyNzA2Nw.G-LAx7.gtuAMk3H32H9IK0skWIV7rPDndiXDZEy6ZpJ2w')
